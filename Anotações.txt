@@ -21,12 +21,16 @@ só precisa conhecer o JDBC, não os drivers específicos do database. O pacote
 padrão do JDBC é o java.sql.*.
 
 
+Arquitetura Geral:
+    Aplicação <> ConnectionFactory <> DataSource <> JDBC <> DriverDB <> DB
+
 Interfaces JDBC:
-    Connection => Statement (PreparedStatement) => ResultSet
+    DataSource => Connection => Statement (PreparedStatement) => ResultSet
 
 
-A interface para buscar a conexão como db é a seguinte:
+Os comandos para buscar a conexão como db são as seguintes:
     Connection con = DriverManager.getConnection(UrlDeConexao);
+    Connection con = DataSource.getConnection();
 
 
 Novos comandos do Eclipse:
@@ -55,8 +59,11 @@ Parâmetro dentro de DriverManager.getConnection(url, user, password):
         &serverTimezone=UTC     => segundo parâmetro fornecido
 
 
-Novo objeto JDBC: Statement. As classes java.sql.Connection criam Statements, 
-que são as formas de interagir com o database (via select, insert, update etc).
+As classes java.sql.Connection criam objetos Statement, que são as formas de 
+interagir com o database (via select, insert, update etc).
+
+Métodos em DataSource:
+    .getConnection  => Obtém a Connection do DataSource/Pool de conexões.
 
 Métodos em Connection:
     .createStatement(stringComandoSql)  => cria um objeto Statement que NÃO vai
@@ -127,3 +134,22 @@ implementam AutoClosable:
     * Connection
     * Statement
     * ResultSet
+
+
+Para evitar uma única conexão com o database (que pode gerar uma fila muito 
+grande nessa conexão sequencial e um número infinito de conexões paralelas), 
+usa-se o chamdo Pool de Conexões - que é especificado pela interface 
+DataSource. Há drivers específicos para implementar DtaSource. No curso, 
+usaremos o driver de pool de conexões chamado C3P0.
+
+Numa aplicação sem Maven, precisaríamos de dois jars: 
+    c3p0-0.9.5.4
+    mchange-commons-java-0.2.16
+Mas se você for usar o Maven, baixe só a dependência do c3p0 mesmo.
+
+A biblioteca mchange-commons-java serve para imprimir o log das ações sobre
+o database.
+
+A classe ComboPooledDataSource tem a seguinte hierarquia:
+    ComboPooledDataSource => AbstractComboPooledDataSource =>
+        PooledDataSource => DataSource.
