@@ -1,12 +1,14 @@
 version: '3.1'
 # Para rodar o mysql no container gerado no docker compose, use:
 #     docker compose exec db bash
-#     mysql -p mysql
-#         (sendo -p o parâmetro pra indicar o nome do banco de dados(?).)
+#       mysql -proot -u root -h localhost -D loja_virtual
+#       mysql -uroot -proot -hlocalhost -Dloja_virtual
+#         (sendo -p o parâmetro pra indicar a senha do banco de dados. Repare
+#          que não há espaço entre o parâmetro e o valor na segunda linha.)
     
 #     OU
 
-#     docker compose exec db mysql -p mysql
+#     docker compose exec db mysql -proot
 #         (O que vem depois do nome do container, DB, é o comando pra rodar).
 
 services:

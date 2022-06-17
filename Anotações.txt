@@ -8,3 +8,16 @@ Pequeno Script para criação do banco de dados no MySQL:
         , PRIMARY KEY (id)
     ) Engine = InnoDB;
     INSERT INTO produto (nome, descricao) VALUES ('NOTEBOOK', 'NOVO NOTEBOOK');
+
+Entre a aplicação Java e o database existe o chamado Driver do database. Por
+exemplo: o MySQL desenvolve um Driver MySQL, o Postgre desenvolve um driver
+pro Postgre etc. Os drivers são distribuídos no formato .jar.
+
+No entanto, os detalhes de implementação de cada driver variam de um pra outro.
+Para abstrair esses detalhes, existe o JDBC (Java DataBase Connectivity), que
+é a especificação que os drivers precisam implementar. Assim, a aplicação Java
+só precisa conhecer o JDBC, não os drivers específicos do database. O pacote
+padrão do JDBC é o java.sql.*.
+
+A interface para buscar a conexão como db é a seguinte:
+    Connection con = DriverManager.getConnection(UrlDeConexao);
