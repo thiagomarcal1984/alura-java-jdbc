@@ -153,3 +153,12 @@ o database.
 A classe ComboPooledDataSource tem a seguinte hierarquia:
     ComboPooledDataSource => AbstractComboPooledDataSource =>
         PooledDataSource => DataSource.
+
+
+Executar o método main de TestePoolConexoes tem um problema: ele cria várias
+conexões por execução, o que acaba se acumulando no servidor MySQL. Use o
+comando "show processlist;" no servidor para confirmar isso. O processlist 
+exibe duas conexões a mais: uma da execução do comando "show processlist", e
+outra do próprio cliente mysql que está consultando o servidor na commandline.
+
+Como resolver isso? ^_^Estude a doc: https://www.mchange.com/projects/c3p0/
