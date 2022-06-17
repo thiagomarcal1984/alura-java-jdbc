@@ -20,6 +20,11 @@ Para abstrair esses detalhes, existe o JDBC (Java DataBase Connectivity), que
 só precisa conhecer o JDBC, não os drivers específicos do database. O pacote
 padrão do JDBC é o java.sql.*.
 
+
+Interfaces JDBC:
+    Connection => Statement => ResultSet
+
+
 A interface para buscar a conexão como db é a seguinte:
     Connection con = DriverManager.getConnection(UrlDeConexao);
 
@@ -29,6 +34,11 @@ Novos comandos do Eclipse:
         Ctrl + F11.
     Como testar a cobertura (Coverage) no Eclipse (?): 
         Ctrl + Shift + F11.
+    Como refatorar o nome de uma variável:
+        Clique sobre o nome da variável/método/classe;
+        Digite Alt + Shift + T;
+        Selecione o comando Rename;
+        Troque o nome da variável/método/classe.
 
 Maven: para rodar o projeto do tipo Console usando a linha de comando:
     mvn compile exec:java -D"exec.mainClass=br.com.loja.TestaConexao"
@@ -65,3 +75,8 @@ Métodos em ResultSet:
             indicada em stringNomeColuna.
     .getString(intSeqColuna)  => Retorna uma String correspondente à coluna
             indicada em intSeqColuna (base 1, não zero).
+
+
+Refatorando o código: a classe ConnectionFactory centraliza os parâmetros para
+criar uma conexão com o database. Logo, é o ponto único e central para mudar
+esses parâmetros.
