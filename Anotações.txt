@@ -167,3 +167,8 @@ Como resolver isso? ^_^Estude a doc: https://www.mchange.com/projects/c3p0/
 Data Access Object (DAO) é um padrão arquitetural usado para mapear uma classe
 a uma tabela do database. Separa as regras de acesso ao database das regras de
 negócio.
+
+Repare que os DAO recebem uma Connection por parâmetro. Isso é bom porque a
+mesma Connection pode ser compartilhada por vários DAO. Se as DAO instanciassem
+automaticamente a Connection dentro de seus objetos, não seria possível 
+trabalhar com transações.
