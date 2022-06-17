@@ -10,27 +10,25 @@ public class TestaInsercaoComParametro {
 	
 	public static void main(String[] args) throws SQLException {
 		ConnectionFactory factory = new ConnectionFactory();
-		Connection connection = factory.recuperarConexao();
+		try (Connection connection = factory.recuperarConexao()) {
 		
-		connection.setAutoCommit(false); // Evita o commit automático das transações.
-
-		try {
-			PreparedStatement stm = connection.prepareStatement(
-					"INSERT INTO PRODUTO (nome, descricao) VALUES (?, ?);"
-					, Statement.RETURN_GENERATED_KEYS
-			);
-			
-			adicionarVariavel("SmartTV", "45 polegadas", stm);
-			adicionarVariavel("Rádio", "Rádio de bateria", stm);
-			
-			connection.commit();
-			
-			stm.close();
-			connection.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("ROLLBACK EXECUTADO.");
-			connection.rollback();
+			connection.setAutoCommit(false); // Evita o commit automático das transações.
+	
+			try (PreparedStatement stm = connection.prepareStatement(
+						"INSERT INTO PRODUTO (nome, descricao) VALUES (?, ?);"
+						, Statement.RETURN_GENERATED_KEYS
+				)) {
+				adicionarVariavel("SmartTV", "45 polegadas", stm);
+				adicionarVariavel("Rádio", "Rádio de bateria", stm);
+				
+				connection.commit();
+				
+				stm.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("ROLLBACK EXECUTADO.");
+				connection.rollback();
+			}
 		}
 	}
 
@@ -45,13 +43,14 @@ public class TestaInsercaoComParametro {
 		
 		stm.execute();
 		
-		ResultSet rst = stm.getGeneratedKeys();
+		try (ResultSet rst = stm.getGeneratedKeys()){
 
-		System.out.println("Número de colunas do ResultSet: " + rst.getMetaData().getColumnCount());
-		
-		while (rst.next()) {
-			Integer id = rst.getInt(1);
-			System.out.println("O ID criado foi: " + id);
+			System.out.println("Número de colunas do ResultSet: " + rst.getMetaData().getColumnCount());
+			
+			while (rst.next()) {
+				Integer id = rst.getInt(1);
+				System.out.println("O ID criado foi: " + id);
+			}
 		}
 	}
 

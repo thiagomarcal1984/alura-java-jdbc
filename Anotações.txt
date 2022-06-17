@@ -118,3 +118,12 @@ esses parâmetros.
 
 SQL Injection: é o ataque de incluir um script SQL em campos que são usados 
 para os CRUD da aplicação. 
+
+
+A partir do Java 7 surgiu o chamado "try-with-resources", que facilita o 
+fechamento de objetos Connection. Classes que implementam a interface 
+AutoClosable podem ser usados em try-with-resources. Algumas classes que 
+implementam AutoClosable:
+    * Connection
+    * Statement
+    * ResultSet
