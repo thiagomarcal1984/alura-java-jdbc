@@ -69,6 +69,10 @@ Métodos em Statement:
             Statement, que contém os códigos de identificação gerados. Para 
             recuperar esse ResultSet, use: 
                 ResultSet rst = stm.getGeneratedKeys();
+    .getUpdateCount()   => Retorna a quantidade de registros alterados após a
+            execução do Statement (seja com DELETE ou UPDATE). Se não houver
+            resultados ou o método .execute retornar um ResultSet, este método
+            retorna -1.
 
 Métodos em ResultSet:
     .next()     => Muda o cursor do ResultSet para a próxima linha.
