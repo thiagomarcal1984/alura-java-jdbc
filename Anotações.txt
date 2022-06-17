@@ -22,7 +22,7 @@ padrão do JDBC é o java.sql.*.
 
 
 Interfaces JDBC:
-    Connection => Statement => ResultSet
+    Connection => Statement (PreparedStatement) => ResultSet
 
 
 A interface para buscar a conexão como db é a seguinte:
@@ -58,6 +58,15 @@ Parâmetro dentro de DriverManager.getConnection(url, user, password):
 Novo objeto JDBC: Statement. As classes java.sql.Connection criam Statements, 
 que são as formas de interagir com o database (via select, insert, update etc).
 
+Métodos em Connection:
+    .createStatement(stringComandoSql)  => cria um objeto Statement que NÃO vai
+            receber parâmetros.
+    .prepareStatement(stringComandoSql, int flag) => cria um objeto 
+            PreparedStatement que SIM vai receber parâmetros. A flag 
+            Statement.RETURN_GENERATED_KEYS é usada para possibilitar a 
+            recuperação das PK de registros modificados através do método 
+            .getGeneratedKeys() obtido do objeto PreparedStatement.
+
 Métodos em Statement:
     .execute(stringComandoSql)  => Retorna true se o resultado for uma lista.
             Se o comando for um INSERT, UPDATE ou DELETE, retorna false.
@@ -73,6 +82,12 @@ Métodos em Statement:
             execução do Statement (seja com DELETE ou UPDATE). Se não houver
             resultados ou o método .execute retornar um ResultSet, este método
             retorna -1.
+
+Métodos em PreparedStatement:
+    .getGeneratedKeys() => Retorna um ResultSet que contém as PK das linhas
+            modificadas dentro do database.
+    .setString(int numOrdem, string Valor)  => Seta uma String no parâmetro
+            que aparece na ordem numOrdem da PreparedStatement.
 
 Métodos em ResultSet:
     .next()     => Muda o cursor do ResultSet para a próxima linha.
@@ -92,3 +107,7 @@ Métodos em ResultSet:
 Refatorando o código: a classe ConnectionFactory centraliza os parâmetros para
 criar uma conexão com o database. Logo, é o ponto único e central para mudar
 esses parâmetros.
+
+
+SQL Injection: é o ataque de incluir um script SQL em campos que são usados 
+para os CRUD da aplicação. 
