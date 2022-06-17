@@ -1,9 +1,9 @@
 package br.com.loja;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class TestaListagem {
 
@@ -11,11 +11,16 @@ public class TestaListagem {
 		ConnectionFactory connectionFactory = new ConnectionFactory();
 		Connection con = connectionFactory.recuperarConexao();
 		
-		Statement stm = con.createStatement();
+		PreparedStatement stm = con.prepareStatement("SELECT ID, NOME, DESCRICAO FROM PRODUTO");
+			/*
+			 *  Futuramente a String do SQL poderia ser:
+			 *  	"SELECT ID, NOME, DESCRICAO FROM PRODUTO WHERE nome = ?"
+			 *  
+			 *  E poderíamos colocar o parâmetro para filtro:
+			 *  	stm.setString(1, "NOTEBOOK");
+			 */
 		
-		boolean resultado = stm.execute("SELECT ID, NOME, DESCRICAO FROM PRODUTO");
-		System.out.println("O resultado é uma lista (select)? " + resultado);
-		
+		stm.execute();
 		ResultSet rst = stm.getResultSet();
 		
 		while(rst.next()) {

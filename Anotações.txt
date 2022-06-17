@@ -88,6 +88,8 @@ Métodos em PreparedStatement:
             modificadas dentro do database.
     .setString(int numOrdem, string Valor)  => Seta uma String no parâmetro
             que aparece na ordem numOrdem da PreparedStatement.
+    .setInt(int numOrdem, int Valor)  => Seta um Integer no parâmetro
+            que aparece na ordem numOrdem da PreparedStatement.
 
 Métodos em ResultSet:
     .next()     => Muda o cursor do ResultSet para a próxima linha.
