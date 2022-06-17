@@ -8,6 +8,7 @@ Pequeno Script para criação do banco de dados no MySQL:
         , PRIMARY KEY (id)
     ) Engine = InnoDB;
     INSERT INTO produto (nome, descricao) VALUES ('NOTEBOOK', 'NOVO NOTEBOOK');
+    INSERT INTO produto (nome, descricao) VALUES ('GELADEIRA', 'BLUE FREEZER');
 
 Entre a aplicação Java e o database existe o chamado Driver do database. Por
 exemplo: o MySQL desenvolve um Driver MySQL, o Postgre desenvolve um driver
@@ -42,3 +43,25 @@ Parâmetro dentro de DriverManager.getConnection(url, user, password):
         loja_virtual            => nome do database usado.
         ?useTimezone=true       => primeiro parâmetro fornecido.
         &serverTimezone=UTC     => segundo parâmetro fornecido
+
+
+Novo objeto JDBC: Statement. As classes java.sql.Connection criam Statements, 
+que são as formas de interagir com o database (via select, insert, update etc).
+
+Métodos em Statement:
+    .execute(stringComandoSql)  => Retorna true se o resultado for uma lista.
+            Se o comando for um INSERT, UPDATE ou DELETE, retorna false.
+            De forma purista, .execute diz o comando retorna um ResultSet.
+    .getResultSet()     => Retorna a lista resultante do comando em Statement.
+
+Métodos em ResultSet:
+    .next()     => Muda o cursor do ResultSet para a próxima linha.
+                    Retorna true se o método conseguir avançar o cursor.
+    .getInt(stringNomeColuna)   => Retorna um inteiro correspondente à coluna
+            indicada em stringNomeColuna.
+    .getInt(intSeqColuna)   => Retorna um inteiro correspondente à coluna
+            indicada em intSeqColuna (base 1, não zero).
+    .getString(stringNomeColuna)  => Retorna uma String correspondente à coluna
+            indicada em stringNomeColuna.
+    .getString(intSeqColuna)  => Retorna uma String correspondente à coluna
+            indicada em intSeqColuna (base 1, não zero).
