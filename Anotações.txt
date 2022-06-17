@@ -21,3 +21,24 @@ padrão do JDBC é o java.sql.*.
 
 A interface para buscar a conexão como db é a seguinte:
     Connection con = DriverManager.getConnection(UrlDeConexao);
+
+
+Novos comandos do Eclipse:
+    Como rodar a aplicação main no Eclipse: 
+        Ctrl + F11.
+    Como testar a cobertura (Coverage) no Eclipse (?): 
+        Ctrl + Shift + F11.
+
+Maven: para rodar o projeto do tipo Console usando a linha de comando:
+    mvn compile exec:java -D"exec.mainClass=br.com.loja.TestaConexao"
+    Repare no -D (maiúsculo). O problema é que o Console fica travado.
+
+Parâmetro dentro de DriverManager.getConnection(url, user, password):
+    jdbc:{provider}://{server}/{db}?{prm1}={val1}&{prm2}={val2}&{prm3}={val3}
+    jdbc:mysql://localhost/loja_virtual?useTimezone=true&serverTimezone=UTC
+        jdbc:                   => especificação.
+        mysql://                => provedor do database usado.
+        localhost/              => endereço do servidor do database.
+        loja_virtual            => nome do database usado.
+        ?useTimezone=true       => primeiro parâmetro fornecido.
+        &serverTimezone=UTC     => segundo parâmetro fornecido
