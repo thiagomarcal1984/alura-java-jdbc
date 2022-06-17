@@ -162,3 +162,8 @@ exibe duas conexões a mais: uma da execução do comando "show processlist", e
 outra do próprio cliente mysql que está consultando o servidor na commandline.
 
 Como resolver isso? ^_^Estude a doc: https://www.mchange.com/projects/c3p0/
+
+
+Data Access Object (DAO) é um padrão arquitetural usado para mapear uma classe
+a uma tabela do database. Separa as regras de acesso ao database das regras de
+negócio.
