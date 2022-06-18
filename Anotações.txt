@@ -10,6 +10,23 @@ Pequeno Script para criação do banco de dados no MySQL:
     INSERT INTO produto (nome, descricao) VALUES ('NOTEBOOK', 'NOVO NOTEBOOK');
     INSERT INTO produto (nome, descricao) VALUES ('GELADEIRA', 'BLUE FREEZER');
 
+    CREATE TABLE CATEGORIA(
+        id INT AUTO_INCREMENT
+        , nome VARCHAR(50) NOT NULL
+        , PRIMARY KEY (id)
+    ) Engine = InnoDB;
+
+    INSERT INTO categoria (nome) VALUES 
+        ('ELETRÔNICOS'),
+        ('ELETRODOMÉSTICOS'),
+        ('MÓVEIS');
+
+    ALTER TABLE PRODUTO ADD COLUMN id_categoria INT;
+    ALTER TABLE PRODUTO ADD FOREIGN KEY (id_categoria) REFERENCES CATEGORIA (id);
+    UPDATE PRODUTO SET id_categoria = 1 WHERE id = 1;
+    UPDATE PRODUTO SET id_categoria = 2 WHERE id = 2;
+    UPDATE PRODUTO SET id_categoria = 3 WHERE id >= 3;
+
 Entre a aplicação Java e o database existe o chamado Driver do database. Por
 exemplo: o MySQL desenvolve um Driver MySQL, o Postgre desenvolve um driver
 pro Postgre etc. Os drivers são distribuídos no formato .jar.
