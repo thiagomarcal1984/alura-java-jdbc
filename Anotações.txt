@@ -194,3 +194,8 @@ trabalhar com transações.
 Queries N + 1: Quando há relacionamentos, é má prática listar elementos-filho
 para cada elemento-pai. Do jeito como está implementado o método de buscar 
 produtos por categoria, muitas queries são repetidas (categorias x produtos).
+
+
+Solução: criar métodos que executem apenas uma query no database, e o ResultSet
+vai ser usado para preencher tanto o elemento-pai quanto os elementos-filho.
+Melhor uma única query do que (categoria x produto + categoria) queries!
