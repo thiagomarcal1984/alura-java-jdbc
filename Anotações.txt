@@ -189,3 +189,8 @@ Repare que os DAO recebem uma Connection por parâmetro. Isso é bom porque a
 mesma Connection pode ser compartilhada por vários DAO. Se as DAO instanciassem
 automaticamente a Connection dentro de seus objetos, não seria possível 
 trabalhar com transações.
+
+
+Queries N + 1: Quando há relacionamentos, é má prática listar elementos-filho
+para cada elemento-pai. Do jeito como está implementado o método de buscar 
+produtos por categoria, muitas queries são repetidas (categorias x produtos).
