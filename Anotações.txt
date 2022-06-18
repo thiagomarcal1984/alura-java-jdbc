@@ -199,3 +199,24 @@ produtos por categoria, muitas queries são repetidas (categorias x produtos).
 Solução: criar métodos que executem apenas uma query no database, e o ResultSet
 vai ser usado para preencher tanto o elemento-pai quanto os elementos-filho.
 Melhor uma única query do que (categoria x produto + categoria) queries!
+
+
+Anotações sobre projeto o da pasta codigo-com-view:
+    O conteúdo da pasta continha um projeto do Eclipse normal. Para converter
+    para um projeto do Maven,:
+        Botão direito -> Configure -> Convert to Maven project.
+
+    Depois da conversão, inclui no pom.xml as dependências c3p0-0.9.5.4 e
+    mysql-connector-java-8.0.17.
+
+    Movi a pasta src\br.com.alura.jdbc.* para src\main\java\br.com.alura.jdbc.
+    Isso no sistema de arquivos. Depois disso, cliquei com o botão direito no
+    projeto e selecionei Properties. Na janela Properties, cliquei no grupo 
+    Java Build Path.
+
+    Na aba Source, adicionei a nova pasta source: src/main/java/.
+    Na aba Libraries, no nó Modulepath atualizei a JRE para o Java usado no 
+    computador, e no nó Classpath removi as bibliotecas em desuso, mas me 
+    certifiquei de que as dependências do Maven aparecem.
+
+    A partir da raiz do projeto, podemos rodar o comando: mvn exec:java.
